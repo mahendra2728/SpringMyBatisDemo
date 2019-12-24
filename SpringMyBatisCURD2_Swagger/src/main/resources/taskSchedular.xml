@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        					http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+
+	<context:component-scan base-package="com.springboot.schedular" />
+
+	<!-- <task:scheduled-tasks scheduler="myScheduler">
+		<task:scheduled ref="myBean" method="printMessage" fixed-delay="5000" />
+	</task:scheduled-tasks>
+	 -->
+	
+	<task:scheduled-tasks scheduler="myScheduler">
+	     
+	     <task:scheduled ref="callSchedularMethod" method="myMethod" fixed-rate ="1000"/>
+	     <!-- <task:scheduled ref="callSchedularMethod" method="getTodaysBirthdayEmployees" fixed-delay="1000"/> -->
+	     <!-- <task:scheduled ref="callSchedularMethod" method="printMessage2" cron="1-59/2 * * * * * "/> --> <!--it will call method at every odd second  -->
+	     
+	     <!-- Use this if we want to execute this method at fixed duration of time  -->
+    	<!--<task:scheduled ref="myBean" method="printMessage" fixed-delay="5000" initial-delay="1000"/> -->
+    	
+    	<!-- Use this if we want to execute this method at fixed duration of time  -->
+    	<!--<task:scheduled ref="Bean2" method="method2" fixed-rate="5000" />-->
+    	
+    	<!-- Use this if we want to execute this method at fixed duration of time on day then use below -->
+    	<!--  <task:scheduled ref="myBean" method="printMessage" cron="*/5 * * * * MON-THU"/>-->
+    	
+    	<!-- <task:scheduled ref="myBean" method="printMessage" cron="*/5 * * * * *"/> -->
+   
+   </task:scheduled-tasks>
+
+	<task:scheduler id="myScheduler" pool-size="10" />
+
+</beans>

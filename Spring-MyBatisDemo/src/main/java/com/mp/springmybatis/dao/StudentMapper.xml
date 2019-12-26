@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mp.springmybatis.dao.StudentMapper">
+
+<resultMap type="student" id="result">
+
+	<id property="id" column="id"/>
+	<result property="first_name" column="first_name"/>
+	<result property="last_name" column="last_name"/>
+	<result property="email" column="email"/>
+	<result property="gender" column="gender"/>
+	<result property="hobbies" column="hobbies"/>
+	<result property="country" column="country"/>
+	<result property="address" column="address"/>
+
+</resultMap>
+
+
+<select id="getAllStudent" resultType="student" resultMap="result">
+	SELECT * FROM STUDENT
+</select>
+
+
+<insert id="insertStudent" parameterType="student" keyProperty="id" useGeneratedKeys="true">
+   insert into student(first_name,last_name,email,gender,hobbies,country,address)
+   VALUES(#{first_name},#{last_name},#{email},#{gender},#{hobbies},#{country},#{address})
+</insert>
+
+<delete id="deletStudent" parameterType="int" >
+   delete from student where id=#{id}
+</delete>
+
+
+<select id="getStudent" parameterType="int"  resultType="student" resultMap="result">
+	SELECT * FROM STUDENT where id=#{theStudent}
+</select>
+
+
+<update id="updateStudent" parameterType="student">
+  update student set first_name=#{first_name},last_name=#{last_name},email=#{email},gender=#{gender},hobbies=#{hobbies},country=#{country},address=#{address}
+  where id=#{id}
+</update>
+
+</mapper>
